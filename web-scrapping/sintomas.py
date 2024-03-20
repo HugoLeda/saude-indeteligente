@@ -13,4 +13,3 @@ options.add_argument('window-size=400,800')
 navegador = webdriver.Chrome(options=options)
 
 navegador.get('https://www.einstein.br/doencas-sintomas#p=0pi')
-
