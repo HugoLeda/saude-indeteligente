@@ -50,9 +50,10 @@ def export_to_excel(data, filename='links.xlsx'):
   df = pd.DataFrame(data, columns=['Links'])  # Create DataFrame if data is not already one
   df.to_excel(filename, index=False)  # Export to Excel without index column
 
-getLinks()
+#getLinks()
 #lista_links = getLinks()
 #export_to_excel(lista_links)
+  
 def getSymptoms():  
   options = Options()
   # options.add_argument('--headless')
@@ -63,7 +64,7 @@ def getSymptoms():
   #navegador.get('https://www.einstein.br/')
   url = 'https://www.einstein.br/doencas-sintomas/abscesso-cerebral'
   navegador.get(url)    
-  sleep(2)
+  sleep(1)
 
   page_content = navegador.page_source
   site = BeautifulSoup(page_content, 'html.parser')
@@ -88,7 +89,12 @@ def getSymptoms():
   content.append(titles)
   content.append(text)
 
-  print(content)
+  #Pegar todos os textos até encontrar a próxima tag strong
 
-  for link in linksList.links:
-    print(link)
+  print(content)
+  print(site.prettify())
+
+  #for link in linksList.links:
+    #print(link)
+
+getSymptoms()
