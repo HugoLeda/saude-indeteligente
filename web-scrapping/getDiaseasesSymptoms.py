@@ -6,6 +6,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from time import sleep
 import pandas as pd
+import csv
 import linksList
 
 def getLinks():
@@ -41,7 +42,7 @@ def getLinks():
         except:
           navegador.execute_script("arguments[0].click();", next_button)
     
-  print(lista_links)
+  #print(lista_links)
   navegador.quit()
   return lista_links
   
@@ -54,47 +55,58 @@ def export_to_excel(data, filename='links.xlsx'):
 #lista_links = getLinks()
 #export_to_excel(lista_links)
   
-def getSymptoms():  
-  options = Options()
-  # options.add_argument('--headless')
-  options.add_argument('window-size=720,108 0')
+def getSymptoms():   
+  links = linksList.links
+  links = ['/doencas-sintomas/aborto-espontaneo']
+  allSymptoms = []
+  for link in links:       
+    options = Options()  
+    options.add_argument('window-size=720,108 0')
+    navegador = webdriver.Chrome(options=options)
+        
+    url = 'https://www.einstein.br' + link
+    print(url)
+    navegador.get(url)    
+    sleep(0.5)  
 
-  navegador = webdriver.Chrome(options=options)
+    destaque_element = navegador.find_element(By.CLASS_NAME, 'Destaque')
+    
+    strong_elements = destaque_element.find_elements(By.TAG_NAME, 'strong')
+    div_elements = destaque_element.find_elements(By.TAG_NAME, 'div')
 
-  #navegador.get('https://www.einstein.br/')
-  url = 'https://www.einstein.br/doencas-sintomas/abscesso-cerebral'
-  navegador.get(url)    
-  sleep(1)
+    content = []
+    titles = []  
 
-  page_content = navegador.page_source
-  site = BeautifulSoup(page_content, 'html.parser')
+    h1 = navegador.find_element(By.ID, 'TitleContent')  
+    symptomName = h1.text + ':'  
+    content.append(symptomName)
+    
+    for element in strong_elements:
+      titles.append(element.text)    
 
-  destaque_element = navegador.find_element(By.CLASS_NAME, 'Destaque')
+    for element in div_elements:
+      if (element.text != '' and element.text != ' '):
+        content.append(element.text)
 
-  # Find all strong elements within 'destaque'
-  strong_elements = destaque_element.find_elements(By.TAG_NAME, 'strong')
-  div_elements = destaque_element.find_elements(By.TAG_NAME, 'div')
+    allSymptoms.append(content)
+    navegador.quit()    
+  
+  with open('symptoms.csv', 'w', newline='', encoding='utf-8') as csvfile:
+    # Create a CSV writer object
+    writer = csv.writer(csvfile)
 
-  content = []
-  titles = []
-  text = []
+    # Write the header row (optional)
+    writer.writerow(['Symptoms'])
 
-  # Print the text content of each strong 
-  for element in strong_elements:
-    titles.append(element.text)
+    # Write each item in allSymptoms as a row in the CSV file
+    for symptoms in allSymptoms:
+      print(symptoms)
+      writer.writerow(symptoms)
 
-  for element in div_elements:
-    text.append(element.text)
+  with open('symptoms.txt', 'w', encoding='utf-8') as textfile:
+    for symptoms in allSymptoms:
+      # Join content within each symptom item with newline
+      textfile.write('\n'.join(symptoms) + '\n\n')
 
-  content.append(titles)
-  content.append(text)
-
-  #Pegar todos os textos até encontrar a próxima tag strong
-
-  print(content)
-  print(site.prettify())
-
-  #for link in linksList.links:
-    #print(link)
-
+  print("Symptoms data exported to symptoms.txt")
 getSymptoms()
