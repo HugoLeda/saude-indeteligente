@@ -15,9 +15,7 @@ def getLinks():
   lista_links = []
 
   options = Options()
-  # options.add_argument('--headless')
   options.add_argument('window-size=720,108 0')
-
   navegador = webdriver.Chrome(options=options)
 
   #navegador.get('https://www.einstein.br/doencas-sintomas?filtro=a#p=0')
@@ -56,57 +54,56 @@ def export_to_excel(data, filename='links.xlsx'):
 #export_to_excel(lista_links)
   
 def getSymptoms():   
-  links = linksList.links
-  links = ['/doencas-sintomas/aborto-espontaneo']
+  links = linksList.links  
   allSymptoms = []
-  for link in links:       
-    options = Options()  
-    options.add_argument('window-size=720,108 0')
-    navegador = webdriver.Chrome(options=options)
-        
-    url = 'https://www.einstein.br' + link
-    print(url)
-    navegador.get(url)    
-    sleep(0.5)  
+  try:
+    for link in links:       
+      options = Options()  
+      options.add_argument('window-size=720,108 0')
+      navegador = webdriver.Chrome(options=options)
+          
+      url = 'https://www.einstein.br' + link
+      print(url)
+      navegador.get(url)    
+      sleep(0.5)  
 
-    destaque_element = navegador.find_element(By.CLASS_NAME, 'Destaque')
-    
-    strong_elements = destaque_element.find_elements(By.TAG_NAME, 'strong')
-    div_elements = destaque_element.find_elements(By.TAG_NAME, 'div')
+      destaque_element = navegador.find_element(By.CLASS_NAME, 'Destaque')
+      
+      strong_elements = destaque_element.find_elements(By.TAG_NAME, 'strong')
+      div_elements = destaque_element.find_elements(By.TAG_NAME, 'div')
 
-    content = []
-    titles = []  
+      content = []
+      titles = []  
 
-    h1 = navegador.find_element(By.ID, 'TitleContent')  
-    symptomName = h1.text + ':'  
-    content.append(symptomName)
-    
-    for element in strong_elements:
-      titles.append(element.text)    
+      h1 = navegador.find_element(By.ID, 'TitleContent')  
+      symptomName = h1.text + ':'  
+      content.append(symptomName)
+      
+      for element in strong_elements:
+        titles.append(element.text)    
 
-    for element in div_elements:
-      if (element.text != '' and element.text != ' '):
-        content.append(element.text)
+      for element in div_elements:
+        if (element.text != '' and element.text != ' '):
+          content.append(element.text)
 
-    allSymptoms.append(content)
-    navegador.quit()    
-  
+      allSymptoms.append(content)
+      navegador.quit()    
+  except:
+    print('')
+
   with open('symptoms.csv', 'w', newline='', encoding='utf-8') as csvfile:
-    # Create a CSV writer object
     writer = csv.writer(csvfile)
 
-    # Write the header row (optional)
     writer.writerow(['Symptoms'])
 
-    # Write each item in allSymptoms as a row in the CSV file
     for symptoms in allSymptoms:
       print(symptoms)
       writer.writerow(symptoms)
 
   with open('symptoms.txt', 'w', encoding='utf-8') as textfile:
     for symptoms in allSymptoms:
-      # Join content within each symptom item with newline
       textfile.write('\n'.join(symptoms) + '\n\n')
 
   print("Symptoms data exported to symptoms.txt")
+
 getSymptoms()
