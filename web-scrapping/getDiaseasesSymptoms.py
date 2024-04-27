@@ -54,10 +54,10 @@ def export_to_excel(data, filename='links.xlsx'):
 #export_to_excel(lista_links)
   
 def getSymptoms():   
-  links = linksList.links  
-  allSymptoms = []
-  try:
-    for link in links:       
+  links = linksList.links    
+  allSymptoms = []  
+  for link in links:
+    try:         
       options = Options()  
       options.add_argument('window-size=720,108 0')
       navegador = webdriver.Chrome(options=options)
@@ -86,10 +86,13 @@ def getSymptoms():
         if (element.text != '' and element.text != ' '):
           content.append(element.text)
 
-      allSymptoms.append(content)
-      navegador.quit()    
-  except:
-    print('')
+      allSymptoms.append(content)          
+    except Exception as e:
+      print(f"Erro ao processar o link: {link}")
+      print(f"Erro: {e}") 
+    finally:
+      navegador.quit()           
+    
 
   with open('symptoms.csv', 'w', newline='', encoding='utf-8') as csvfile:
     writer = csv.writer(csvfile)
