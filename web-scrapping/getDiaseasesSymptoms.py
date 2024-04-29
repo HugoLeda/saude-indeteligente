@@ -56,6 +56,7 @@ def export_to_excel(data, filename='links.xlsx'):
 def getSymptoms():   
   links = linksList.links    
   allSymptoms = []  
+  erros = []
   for link in links:
     try:         
       options = Options()  
@@ -87,9 +88,8 @@ def getSymptoms():
           content.append(element.text)
 
       allSymptoms.append(content)          
-    except Exception as e:
-      print(f"Erro ao processar o link: {link}")
-      print(f"Erro: {e}") 
+    except Exception as e:      
+      erros.append([link, e])
     finally:
       navegador.quit()           
     
@@ -99,8 +99,7 @@ def getSymptoms():
 
     writer.writerow(['Symptoms'])
 
-    for symptoms in allSymptoms:
-      print(symptoms)
+    for symptoms in allSymptoms:      
       writer.writerow(symptoms)
 
   with open('symptoms.txt', 'w', encoding='utf-8') as textfile:
@@ -108,5 +107,6 @@ def getSymptoms():
       textfile.write('\n'.join(symptoms) + '\n\n')
 
   print("Symptoms data exported to symptoms.txt")
+  print(erros)
 
 getSymptoms()
