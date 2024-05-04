@@ -46,13 +46,9 @@ def getLinks():
   
 
 def export_to_excel(data, filename='links.xlsx'):  
-  df = pd.DataFrame(data, columns=['Links'])  # Create DataFrame if data is not already one
-  df.to_excel(filename, index=False)  # Export to Excel without index column
+  df = pd.DataFrame(data, columns=['Links'])  
+  df.to_excel(filename, index=False)  
 
-#getLinks()
-#lista_links = getLinks()
-#export_to_excel(lista_links)
-  
 def getSymptoms():   
   links = linksList.links    
   allSymptoms = []  
