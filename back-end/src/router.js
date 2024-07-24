@@ -1,13 +1,17 @@
-// teste commit
+// Importando o módulo Express
 const express = require('express');
+
 const app = express();
-const port = 3000;
+const port = 3000; 
 
+app.get('/', (req, res) => {
+  res.send('Olá, mundo! Esta é a página inicial.');
+});
 
-app.get('/test', (req, res) => {
-  res.send('Rota de teste funcionando!');
+app.get('/users/:userId', (req, res) => {
+  res.send(`Você está vendo o perfil do usuário com ID ${req.params.userId}`);
 });
 
 app.listen(port, () => {
-  console.log(`Servidor está rodando em http://localhost:${port}`);
+  console.log(`Servidor rodando em http://localhost:${port}`);
 });
