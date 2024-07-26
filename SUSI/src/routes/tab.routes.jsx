@@ -12,7 +12,7 @@ export default function TabRoutes() {
   const tabOptions = {
     tabBarOptions: {
       style: {
-        backgroundColor: '#007bff', // Change the background color here
+        backgroundColor: '#99B9FF', // Change the background color here
       },
       headerShown: false,
     },
@@ -21,10 +21,11 @@ export default function TabRoutes() {
   return (
     <Tab.Navigator screenOptions={ ({ route }) => ({
       headerShown: false,
-      tabBarActiveTintColor: '#0c12b',
+      tabBarActiveTintColor: '#000',
       tabBarStyle: {
-        backgroundColor: '#99bff',
-        height: 50,        
+        backgroundColor: 'rgba(153, 185, 255, 0.6)',
+        height: 60,  
+        padding: 0,                        
       }
     }) }>
       <Tab.Screen 
