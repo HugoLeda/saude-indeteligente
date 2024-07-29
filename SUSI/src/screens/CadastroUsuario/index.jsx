@@ -1,12 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Header from '../../components/Header';
+import SearchInput from '../../components/SearchInput';
 
 export default function CadastroUsuario() {
   return (
     <View>
       <Header/>
-      <Text>Cadastro</Text>
+      <SearchInput placheholder={'Consultar paciente'} />      
       <StatusBar style="auto" />
     </View>
   );
