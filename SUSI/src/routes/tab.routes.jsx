@@ -33,7 +33,7 @@ export default function TabRoutes() {
         component={CadastroUsuario}
         options={{
           tabBarIcon: ({ color, size }) => <Feather name="user-plus" color={color} size={size}/>,
-          tabBarLabel: 'Cadastro'
+          tabBarLabel: 'Paciente'
         }}
       />
     

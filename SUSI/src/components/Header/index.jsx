@@ -1,4 +1,4 @@
-import { Text, TextInput, TouchableOpacity, View, Image } from 'react-native';
+import { View, Image } from 'react-native';
 
 import { styles } from './styles';
 
