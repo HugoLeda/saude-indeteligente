@@ -1,7 +1,7 @@
 import { View, Text, ScrollView } from 'react-native';
 import { styles } from './styles';
 
-export default function Grid({TitleOne, TitleTwo}) {
+export default function Grid({ TitleOne, TitleTwo, searchTerm }) {
   const data = [
     {
       nome: 'Joao Hugo Leda',
@@ -17,13 +17,18 @@ export default function Grid({TitleOne, TitleTwo}) {
     },
   ];
 
+  const filteredData = data.filter(item => 
+    item.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    item.cpf.includes(searchTerm)
+  );
+
   return (
     <ScrollView style={styles.grid}>
       <View style={styles.header}>
         <Text style={styles.textHeaderOne}>{TitleOne}</Text>
         <Text style={styles.textHeaderTwo}>{TitleTwo}</Text>
       </View>
-      {data.map((item, index) => (
+      {filteredData.map((item, index) => (
         <View key={index} style={styles.row}>
           <Text style={styles.textColumnOne}>{item.nome}</Text>
           <Text style={styles.textColumnTwo}>{item.cpf}</Text>
