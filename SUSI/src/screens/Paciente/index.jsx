@@ -5,7 +5,7 @@ import Header from '../../components/Header';
 import SearchInput from '../../components/SearchInput';
 import Grid from '../../components/Grid';
 
-export default function CadastroUsuario() {
+export default function Paciente() {
   const [searchTerm, setSearchTerm] = useState('');
 
   return (

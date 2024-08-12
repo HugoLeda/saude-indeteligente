@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Feather } from '@expo/vector-icons'
 
-import CadastroUsuario from '../screens/CadastroUsuario'
+import Paciente from '../screens/Paciente'
 import Historico from '../screens/Historico'
 import Consulta from '../screens/Consulta'
 import Triagem from '../screens/Triagem'
@@ -29,8 +29,8 @@ export default function TabRoutes() {
       }
     }) }>
       <Tab.Screen 
-        name="Cadastro"
-        component={CadastroUsuario}
+        name="Paciente"
+        component={Paciente}
         options={{
           tabBarIcon: ({ color, size }) => <Feather name="user-plus" color={color} size={size}/>,
           tabBarLabel: 'Paciente'
