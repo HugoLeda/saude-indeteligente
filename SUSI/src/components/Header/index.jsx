@@ -1,15 +1,11 @@
 import { View, Image } from 'react-native';
-
 import { styles } from './styles';
+import logo from '../../assets/logo.png';
 
-import logo from '../../assets/logo.png'
-
-export default function Header() {
+export default function Header({ height = 175 }) {
   return (
-    <View style={styles.containerHead}>
-      <Image
-        source={logo}
-      />
+    <View style={[styles.containerHead, { height }]}>
+      <Image source={logo} />
     </View>
-  )
+  );
 }

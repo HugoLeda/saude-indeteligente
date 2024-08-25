@@ -15,6 +15,7 @@ export default function Paciente() {
         placeholder={'Consultar paciente'} 
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
+        registerScreen={'CadastroPaciente'}
       />     
       <Grid 
         TitleOne={'Nome'} 

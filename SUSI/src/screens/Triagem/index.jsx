@@ -1,30 +1,36 @@
 import { StatusBar } from 'expo-status-bar';
-import { Text, TextInput, TouchableOpacity, View } from 'react-native';
-
-import { styles } from './styles';
 import { useState } from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import Header from '../../components/Header';
+import SearchInput from '../../components/SearchInput';
+import Grid from '../../components/Grid';
 
-export default function Triagem() {
-
-  const [description, setDescrription] = useState('')
+export default function Paciente() {
+  const [searchTerm, setSearchTerm] = useState('');
 
   return (
-    <View style={styles.container}>
-      <View style={styles.containerHead}>
-        <Text style={styles.text}>Triagem</Text>
-      </View>
-      <View style={styles.containerInput}>
-        <TextInput 
-          style={styles.input}
-          placeholder='Consultar triagem'
-          placeholderTextColor='#808080'
-          value={description}
-        />
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonContent}>+</Text>
-        </TouchableOpacity>
-      </View>
+    <View>
+      <Header/>
+      <SearchInput 
+        placeholder={'Consultar triagem'} 
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+      />     
+      <Grid 
+        TitleOne={'Nome'} 
+        TitleTwo={'Data'} 
+        searchTerm={searchTerm}
+      />
       <StatusBar style="auto" />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
