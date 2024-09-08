@@ -1,8 +1,11 @@
 import { useState } from 'react';
-import { View, TextInput, TouchableOpacity, Text, FlatList, StyleSheet } from 'react-native';
+import { View, TextInput, TouchableOpacity, Text, FlatList, StyleSheet, Alert } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import Header from '../../components/Header';
 
 export default function NovaTriagem() {
+  const navigation = useNavigation();
+
   const data = [
     { nome: 'Joao Hugo Leda', cpf: '111.111.111-60' },
     { nome: 'Maria Heloysa Rodrigues Silva', cpf: '111.111.111-61' },
@@ -32,6 +35,16 @@ export default function NovaTriagem() {
     setShowOptions(false);
   };
 
+  const handleAvancar = () => {
+    if (!paciente) {
+      Alert.alert('Seleção de Paciente', 'Por favor, selecione um paciente.');
+      return;
+    }
+
+    const selectedPaciente = data.find(item => item.nome === paciente);
+    navigation.navigate('TipoTriagem', { paciente: selectedPaciente });
+  };
+
   return (
     <View style={styles.container}>
       <Header height={100} /> 
@@ -58,7 +71,7 @@ export default function NovaTriagem() {
             style={styles.optionsContainer}
           />
         )}
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={handleAvancar}>
           <Text style={styles.buttonText}>Avançar</Text>
         </TouchableOpacity>
       </View>     

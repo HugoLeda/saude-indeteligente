@@ -2,10 +2,10 @@ import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import Header from '../../components/Header';
 
-export default function TipoTriagem() {
+export default function TipoTriagem({ paciente }) {
   return (
     <View style={styles.container}>
-      <Header height={100} /> 
+      <Header height={100} />
       <View style={styles.content}>
         <TouchableOpacity style={styles.button}>
           <Text style={styles.buttonText}>Capturar Áudio</Text>
@@ -32,10 +32,12 @@ const styles = StyleSheet.create({
   button: {
     width: '80%',
     padding: 15,
-    backgroundColor: '#007BFF',
+    height: 120,
+    backgroundColor: '#066699',
     borderRadius: 5,
     alignItems: 'center',
-    marginBottom: 20,
+    justifyContent: 'center',
+    marginBottom: 50,
   },
   buttonText: {
     color: '#fff',
