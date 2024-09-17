@@ -5,6 +5,9 @@ import Header from '../../components/Header';
 import SearchInput from '../../components/SearchInput';
 import Grid from '../../components/Grid';
 
+// Listar CPF ou CNS
+// Trabalhos futuros, imprimir receiturios, alterar layout e análises preditivas dos dados coletados.
+
 export default function Paciente() {
   const [searchTerm, setSearchTerm] = useState('');
 
