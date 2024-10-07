@@ -5,6 +5,7 @@ import TabRoutes from './tab.routes'
 import CadastroPaciente from '../screens/CadastroPaciente';
 import NovaTriagem from '../screens/NovaTriagem';
 import TipoTriagem from '../screens/TipoTriagem';
+import TextTriagem from '../screens/TextTriagem';
 
 const Stack = createStackNavigator();
 
@@ -14,7 +15,8 @@ export default function StackRoutes() {
       <Stack.Screen name="Home" component={TabRoutes} options={{ headerShown: false }} />   
       <Stack.Screen name="CadastroPaciente" component={CadastroPaciente} options={{ headerShown: true, title: 'Cadastro de Paciente' }} />
       <Stack.Screen name="NovaTriagem" component={NovaTriagem} options={{ headerShown: true, title: 'Triagem - Selecionar Paciente' }} />   
-      <Stack.Screen name="TipoTriagem" component={TipoTriagem} options={{ headerShown: true, title: 'Triagem - Selecionar Tipo' }} />   
+      <Stack.Screen name="TipoTriagem" component={TipoTriagem} options={{ headerShown: true, title: 'Triagem - Selecionar Tipo' }} /> 
+      <Stack.Screen name="TextTriagem" component={TextTriagem} options={{ headerShown: true, title: 'Triagem - preencher sintomas' }}/>   
     </Stack.Navigator>
   );
 }
